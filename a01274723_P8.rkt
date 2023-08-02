@@ -1,0 +1,43 @@
+#lang racket
+
+; Jesus Ramirez Delgado
+; A01274723
+; Programacion 8
+
+; Ejercicio 1
+
+(define (args-swap f)
+  (lambda (a b)
+    (f b a)))
+
+; Ejercicio 2
+
+(define positive?
+  (lambda (x)
+    (> x 0)))
+
+(define symbol?
+  (lambda (x)
+    (= x symbol?)))
+
+(define there-exists-one?
+         (lambda (pred lst)
+             (cond ((null? lst) #f)
+                   ((pred (car lst))
+                    (if (there-exists-one? pred(car lst))#f #t))
+                   (else (there-exists-one? pred (cdr lst))))))
+
+
+
+; Ejercicio 3
+
+(define linear-search
+  (lambda (lst x eq-fun)
+    (define helper
+      (lambda (lst index)
+        (cond ((null? lst) #f)
+              ((eq-fun x (car lst)) index)
+              (else (helper (cdr lst) (+ index 1))))))
+    (helper lst 0))) ; Se llama a la función auxiliar con el índice inicial en 0
+
+
